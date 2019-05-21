@@ -7,21 +7,58 @@ figura.addEventListener('change',()=> {
     var html = '';
     switch(figura.value){
         case "2":break;
-        case "1":break;
-        case "3":break;
-        case "4": html =`
-                        <form action="" id="form-base-altura">
+        case "1":
+        case "3":
+        case "4": html =`                        
                         <div class="form-group">
                             <label for="base">Base</label>
-                            <input type="number" class="form-control" id="base"  placeholder="0.0">
+                            <input type="number" class="form-control" id="base"  placeholder="0">
                         </div>
                         <div class="form-group">
                             <label for="altura">Altura</label>
-                            <input type="number" class="form-control" id="altura" placeholder="0.0">
+                            <input type="number" class="form-control" id="altura" placeholder="0">
                         </div>
-                        <button type="submit" class="btn btn-primary">Carcular</button>
-                    </form>
+                        <button type="submit" class="btn btn-primary">Calcular</button>                   
                     `;break;
     }
     form.innerHTML = html;
 });
+
+//const form = document.querySelector('#form-base-altura');
+
+    form.addEventListener('submit',(e)=> {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var datos = new FormData();
+        if(figura.value != "2"){
+            let altura= document.querySelector("#altura").value;
+            let base= document.querySelector("#base").value;
+            datos.append('a',altura);
+            datos.append('b',base);
+        }
+        var url ='';
+        switch(figura.value){
+            case "1":   url ='./app/rectangulo.php'; break;
+            case "2":   url ='./app/circulo.php';break;
+            case "3":   url ='./app/tequilatero.php';break;
+            case "4":   url ='./app/trectagulo.php';break;
+        }
+
+        const resultado = document.querySelector('#resultado');
+
+        fetch(url,{
+            method :'POST',
+            body: datos
+        })
+        .then(response => response.json())
+        .then(res=>{
+            console.log(res);
+            let html= `
+            <b>Area: <b>&nbsp;<u>${res.a}</u><br>
+            <b>Perimetro: <b>&nbsp;<u>${res.b}</u>`;
+            resultado.innerHTML = html;
+        })
+        .catch(error => console.error('Hubo un error: ',error))
+
+    });
