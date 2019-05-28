@@ -6,7 +6,12 @@ const form = document.querySelector("#form-figura");
 figura.addEventListener('change',()=> {
     var html = '';
     switch(figura.value){
-        case "2":break;
+        case "2":   html =`<div class="form-group">
+                                <label for="Radio">Radio</label>
+                                <input type="number" class="form-control" id="radio" placeholder="0">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Calcular</button>                   
+                    `;break;
         case "1":
         case "3":
         case "4": html =`                        
@@ -36,6 +41,9 @@ figura.addEventListener('change',()=> {
             let base= document.querySelector("#base").value;
             datos.append('a',altura);
             datos.append('b',base);
+        }else if(figura.value == 2){
+            let radio = document.querySelector("#radio").value;
+            datos.append('r', radio);
         }
         var url ='';
         switch(figura.value){
@@ -56,7 +64,7 @@ figura.addEventListener('change',()=> {
             console.log(res);
             let html= `
             <b>Area: <b>&nbsp;<u>${res.a}</u><br>
-            <b>Perimetro: <b>&nbsp;<u>${res.b}</u>`;
+            <b>Perimetro: <b>&nbsp;<u>${res.p}</u>`;
             resultado.innerHTML = html;
         })
         .catch(error => console.error('Hubo un error: ',error))
