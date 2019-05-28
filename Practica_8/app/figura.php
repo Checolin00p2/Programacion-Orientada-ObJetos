@@ -77,14 +77,16 @@ class Rectangulo extends Figura {
     class TrianguloRectanguloIsosceles extends Figura {
         private $base = 0;
         private $altura = 0;
+        private $ladolarg = 0;
 
-        public function __construct($b, $a){
+        public function __construct($b, $a ,$c){
             $this->base = $b;
             $this->altura = $a;
+            $this->ladolarg = $c;
         }
 
         public function calculaPerimetro(){
-            $this->perimetro = (2 * $this->base) + $this->altura;
+            $this->perimetro = $this->base + $this->altura + $this->ladolarg;
         }
 
         public function calculaArea(){

@@ -12,10 +12,8 @@ figura.addEventListener('change',()=> {
                             </div>
                             <button type="submit" class="btn btn-primary">Calcular</button>                   
                     `;break;
-        case "1":
-        case "3":
-        case "4": html =`                        
-                        <div class="form-group">
+        case "1":            
+        case "3": html = `<div class="form-group">
                             <label for="base">Base</label>
                             <input type="number" class="form-control" id="base"  placeholder="0">
                         </div>
@@ -25,6 +23,21 @@ figura.addEventListener('change',()=> {
                         </div>
                         <button type="submit" class="btn btn-primary">Calcular</button>                   
                     `;break;
+
+        case "4":  html = `<div class="form-group">
+                    <label for="base">Base</label>
+                    <input type="number" class="form-control" id="base"  placeholder="0">
+                </div>
+                <div class="form-group">
+                    <label for="altura">Altura</label>
+                    <input type="number" class="form-control" id="altura" placeholder="0">
+                </div>
+                <div class="form-group">
+                    <label for="ladolarg">Lado Largo</label>
+                    <input type="number" class="form-control" id="ladolarg" placeholder="0">
+                </div>
+                <button type="submit" class="btn btn-primary">Calcular</button>                   
+            `;break;
     }
     form.innerHTML = html;
 });
@@ -36,15 +49,23 @@ figura.addEventListener('change',()=> {
         e.stopPropagation();
 
         var datos = new FormData();
-        if(figura.value != "2"){
+        if(figura.value == 4 ){
             let altura= document.querySelector("#altura").value;
             let base= document.querySelector("#base").value;
+            let ladolarg= document.querySelector("#ladolarg").value;
             datos.append('a',altura);
             datos.append('b',base);
+            datos.append('c',ladolarg);
         }else if(figura.value == 2){
             let radio = document.querySelector("#radio").value;
             datos.append('r', radio);
-        }
+        }else if(figura.value == 1 || figura.value == 3 ){
+            let altura= document.querySelector("#altura").value;
+            let base= document.querySelector("#base").value;
+            datos.append('a',altura);
+            datos.append('b',base);}
+
+        
         var url ='';
         switch(figura.value){
             case "1":   url ='./app/rectangulo.php'; break;
