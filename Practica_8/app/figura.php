@@ -8,29 +8,25 @@ abstract class Figura {
     public abstract function calculaArea();
 }
 
-class Rectangulo extends Figura{
+class Rectangulo extends Figura {
     private $base = 0;
     private $altura = 0;
-
-    public function __construct($b,$a){
+    public function __construct($b, $a){
         $this->base = $b;
         $this->altura = $a;
     }
-
     public function calculaPerimetro(){
         $this->perimetro = 2 * ($this->base + $this->altura);
     }
-
     public function calculaArea(){
-        $this->area =  $this->base * $this->altura;
+        $this->area = $this->base * $this->altura;
     }
-
-    public function realizaCalculos(){
-        $this->calculaArea();
+    public function realizarCalculos(){
         $this->calculaPerimetro();
-        return json_encode(['a'=>$this->area,'p'=>$this->perimetro]);
+        $this->calculaArea();
+        return json_encode(['a' => $this->area, 'p' => $this->perimetro]);
     }
-    }
+}
     
     class Circulo extends Figura {
         private $radio = 0;

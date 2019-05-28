@@ -50,7 +50,7 @@ figura.addEventListener('change',()=> {
             case "1":   url ='./app/rectangulo.php'; break;
             case "2":   url ='./app/circulo.php';break;
             case "3":   url ='./app/tequilatero.php';break;
-            case "4":   url ='./app/trectagulo.php';break;
+            case "4":   url ='./app/trectangulo.php';break;
         }
 
         const resultado = document.querySelector('#resultado');
